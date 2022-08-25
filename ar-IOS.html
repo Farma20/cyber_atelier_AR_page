@@ -1,0 +1,179 @@
+<!-- BEGIN: Top HTML -->
+<!DOCTYPE html>
+<!-- include aframe -->
+<script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+<!-- include ar.js -->
+<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+
+<!-- to load .ply model -->
+<script src="https://rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.loaders.min.js"></script>
+<style>
+    #playButton {
+        margin-left: 35%;
+        margin-top: 50%;
+        width: 48px;
+        height: 50px;
+        border: 0px solid black;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #playButton img{
+        height: 100%;
+        width: 100%;
+        margin-left: 15%;
+    }
+
+</style>
+<script>
+
+    var markerFound = 0;
+    let n;
+    AFRAME.registerComponent('button', {
+    init: function () {
+
+
+        // let i = setInterval(function() {
+        //     if (document.querySelector("#arjs-video")){
+        //         clearInterval(i);
+        //         document.getElementById('playButtonDIV').style.display = 'flex';
+        //     }
+        // }, 1);
+
+
+
+        function reset(){
+            for(let i = 0; i < n; i++){
+                Video[i].pause();
+                Video[i].muted = true;
+                Video[i].currentTime = 0;
+            }
+        }
+        function play() {
+            for (let i = 0; i < n; i++) {
+                Video[i].muted = false;
+                Video[i].play();
+            }
+        }
+
+
+        var elem = document.documentElement;
+        var marker = document.querySelector("#marker");
+        var Video = document.getElementsByClassName("video_asset");
+        var videoButton = document.getElementsByClassName("video_button");
+
+        n = Video.length;
+        let curVideo = 0;
+
+        firstEnter = true;
+
+        videoButton[0].addEventListener('click', function(evt){
+                document.getElementById('playButtonDIV').style.display = 'none';
+                Video[curVideo].muted = false;
+                firstEnter = false;
+                Video[curVideo].play();  
+        })
+
+        // videoButton[1].addEventListener('click', function(evt){
+        //     Video[curVideo].pause();
+        // })
+        
+
+        
+
+        marker.addEventListener("markerFound", function (evt) {
+            markerFound = 1;
+
+            if(firstEnter){
+                document.getElementById('playButtonDIV').style.display = 'flex';
+            }
+
+            else if(document.getElementById('playButtonDIV').style.display == 'none'){
+                Video[curVideo].play();
+            }
+            
+        });
+
+        marker.addEventListener("markerLost", function (evt) {
+            markerFound = 0;
+            document.getElementById('playButtonDIV').style.display = 'none';
+            Video[curVideo].pause();
+        });
+
+
+        
+
+
+
+    }
+});
+
+</script>
+
+<!-- END: Top HTML -->
+<!-- BEGIN: Unity Compiled Events -->
+
+
+
+
+<!-- END: Unity Compiled Events -->
+
+
+<!-- BEGIN: Middle HTML -->
+<body id="MyBody" style='margin : 0px; overflow: hidden; font-family: Monospace;'>
+
+
+        <div id="playButtonDIV" style='position: fixed; top: 10px; left: 30px; width:100%; text-align: center; z-index: 1; justify-content: left; display: none;'>
+            <button class="video_button" id="playButton" style='left: 10px'>
+                <img src="./img/play3.png">
+            </button>
+        </div>
+
+        <!-- <div style='position: fixed; top: 40px; left: 30px; width:100%; text-align: center; z-index: 1; display: flex; justify-content: left;'>
+            <button class="video_button" id="prevButton" style='left: 10px'>
+                Pause
+            </button>
+        </div> -->
+
+        
+
+        <!-- <a-scene embedded arjs='debugUIEnabled: false; sourceType: video; sourceUrl:../../data/videos/headtracking.mp4;'> -->
+    <a-scene id="scene" embedded arjs='debugUIEnabled: false; sourceType: webcam' vr-mode-ui='enabled: false'>
+        <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: .intersectable; useWorldCoordinates: true;"></a-entity>
+        <!-- END: Middle HTML -->
+        <!-- BEGIN: Unity Compiled Assets -->
+        <a-assets>
+            <video class="video_asset" id="Video_Asset_0" autoplay="false" loop crossorigin="anonymous" src="1.webm" webkit-playsinline playsinline controls muted></video>
+
+            <!-- <video class="video_asset" id="Video_Asset_1" autoplay="false" loop crossorigin="anonymous" src="3.webm" webkit-playsinline playsinline controls muted></video>
+
+            <video class="video_asset" id="Video_Asset_2" autoplay="false" loop crossorigin="anonymous" src="6.webm" webkit-playsinline playsinline controls muted></video>
+
+            <video class="video_asset" id="Video_Asset_3" autoplay="false" loop crossorigin="anonymous" src="7.webm" webkit-playsinline playsinline controls muted></video> -->
+        </a-assets>
+
+        
+        <!-- END: Unity Compiled Assets -->
+
+        <!-- BEGIN: Add Image Target (marker) // type = 'pattern' url = 'pattern-Atelier.patt' -->
+        <a-marker id="marker" preset="hiro"  emitevents="true" button>
+        <!-- END: Add Image Target (marker) -->
+        
+            <!-- BEGIN: Unity Compiled Objects -->
+            <a-video id="AR_Video" width="5" height="7" src="#Video_Asset_0" class="intersectable" position="0 0.488 -1" rotation="-90 0 0" color="#FFFFFF"></a-video>
+
+            <!-- <a-video id="AR_Video" width="5" height="7" src="#Video_Asset_1" class="intersectable" position="0 0.488 -1" rotation="-90 0 0" color="#FFFFFF"></a-video>
+
+            <a-video id="AR_Video" width="5" height="7" src="#Video_Asset_2" class="intersectable" position="0 0.488 -1" rotation="-90 0 0" color="#FFFFFF"></a-video>
+
+            <a-video id="AR_Video" width="5" height="7" src="#Video_Asset_3" class="intersectable" position="0 0.488 -1" rotation="-90 0 0" color="#FFFFFF"></a-video> -->
+            <!-- END: Unity Compiled Objects -->
+        
+        <!-- BEGIN: Bottom HTML -->
+        </a-marker>
+        <a-entity camera></a-entity>
+    </a-scene>
+</body>
+</html><!-- END: Bottom HTML -->

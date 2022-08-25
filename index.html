@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+    <!-- include ar.js -->
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+
+    <!-- to load .ply model -->
+    <script src="https://rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.loaders.min.js"></script>
+    <link rel="stylesheet" href="mobile.css">
+
+    <script>
+
+        let i = setInterval(function() {
+                    var frameObj = document.getElementById("iframeAR");
+                    
+                    console.log(frameObj.contentWindow.document.querySelector("#arjs-video"))
+                    if (frameObj.contentWindow.document.querySelector("#arjs-video")){
+                        clearInterval(i);
+                        document.getElementById('load').style.display = 'none';
+                        alert(1)
+                    }
+                }, 1);
+
+
+
+        let nowCurrentVideo = 1;
+        let maxCurrenVideo = 8;
+
+        function next(){
+            var frameObj = document.getElementById("iframeAR");
+            
+            let video = frameObj.contentWindow.document.querySelector('#Video_Asset_0')
+            var marker = frameObj.contentWindow.document.querySelector("#marker");
+            marker.object3D.visible = false;
+
+            nowCurrentVideo++;
+            if(nowCurrentVideo > maxCurrenVideo){nowCurrentVideo = 1;}
+
+            video.src = nowCurrentVideo+'.webm'
+
+
+        }
+
+        function prev(){
+            var frameObj = document.getElementById("iframeAR");
+
+           
+            let video = frameObj.contentWindow.document.querySelector('#Video_Asset_0')
+            var marker = frameObj.contentWindow.document.querySelector("#marker");
+            marker.object3D.visible = false;
+
+            nowCurrentVideo--;
+            if(nowCurrentVideo == 0){nowCurrentVideo = maxCurrenVideo;}
+
+            video.src = nowCurrentVideo+'.webm'
+        }
+
+        getIframeContent();
+
+        function nextDres(){
+                let radios = document.querySelectorAll('input[type="radio"]');
+                let radiosLen = radios.length;
+                let value = 0;
+                for (let radio of radios) {
+                    if (radio.checked) {;
+                        value = radio.value;
+                        radio.checked = false;
+                    }
+                }
+                value++;
+                if(value > radiosLen){
+                    value = 1;
+                }
+                
+                next();
+                setPosition(radios, value )
+            }
+        
+        function prevDres(){
+            let radios = document.querySelectorAll('input[type="radio"]');
+            let radiosLen = radios.length;
+            let value = 0;
+            for (let radio of radios) {
+                if (radio.checked) {;
+                    value = radio.value;
+                    radio.checked = false;
+                }
+            }
+            value--;
+            if(value == 0){
+                value = radiosLen;
+            }
+            
+            prev()
+            setPosition(radios, value )
+        }
+        
+        
+        function setPosition(radios, value){
+            let width = 300;
+            if(screen.width <= 365){
+                width = 230;
+            }
+
+
+            for (let radio of radios) {
+                if(radio.value == value){
+                    radio.checked = true;
+                    if(radio.value == 1){
+                        document.getElementById("s1").style.marginLeft = '0';
+                    }
+                    else if(radio.value == 2){
+                        var shift = width * (radio.value - 1);
+                        document.getElementById("s1").style.marginLeft = -shift+"px";
+                        console.log(-shift+"px")
+                    }
+                    else if(radio.value == 3){
+                        var shift = width * (radio.value - 1);
+                        document.getElementById("s1").style.marginLeft = -shift+"px";
+                        console.log(-shift+"px")
+                    }
+                    else if(radio.value == 4){
+                        var shift = width * (radio.value - 1);
+                        document.getElementById("s1").style.marginLeft = -shift+"px";
+                        console.log(-shift+"px")
+                    }
+                    
+                }
+            }
+        }
+        </script>
+    
+    <title>Document</title>
+</head>
+<body>
+
+
+
+<!-- END: Top HTML -->
+<!-- BEGIN: Unity Compiled Events -->
+
+
+
+
+    <div class="AR">
+            <div class="circle" id="load"></div>
+            <iframe class="mainAR" id="iframeAR" src="ar-IOS.html"></iframe>
+    </div>
+
+
+    <div class="color_slider" style="background: #B1A7A5; width: 100%; display: flex; justify-content: center;">
+        <div class="main_dress_slider">
+            <div class="left_button" id="left" onclick="prevDres();">
+                <img src="img/left-arrow.png">
+            </div>
+    
+            <div class="dress_slider">
+                <div class="dress_div">
+    
+                    <input type="radio" name="r" id="dress1" value="1" checked>
+                    <input type="radio" name="r" id="dress2" value="2">
+                    <input type="radio" name="r" id="dress3" value="3">
+                    <input type="radio" name="r" id="dress4" value="4">
+    
+                    <div class="main_dress" id="s1">
+                        <div class="img_div">
+                            <img src="img/image1.svg" >
+                        </div>
+                        <div class="img_description">
+                            <p>
+                                Создатель бренда — Наталья Коновалова.
+Данный образ из коллекции Kiwi.dress Осень’’22.
+                                
+                            </p>
+                            <!-- <div class="description_button">Описание</div> -->
+                        </div>
+                    </div>
+    
+                    <div class="main_dress">
+                        <div class="img_div">
+                            <img src="img/image2.svg" >
+                        </div>
+                        <div class="img_description">
+                           <p>
+                                ПОсновательница бренда GETCLO — Наталья Зайцева. В костюме соединена классика и элементы стиля сафари. 
+                            </p>
+                            <!-- <div class="description_button">Описание</div> -->
+                        </div>
+                    </div>
+    
+                    <div class="main_dress">
+                        <div class="img_div">
+                            <img src="img/image3.svg" >
+                        </div>
+                        <div class="img_description">
+                            <p>
+                                Платья спортивного стиля, повседневного и   фольклорного стилей характеризуются свободой  движений и практичностью. 
+                            </p>
+                            <!-- <div class="description_button">Описание</div> -->
+                        </div>
+                    </div>
+                    
+                    <div class="main_dress">
+                        <div class="img_div">
+                            <img src="img/image4.svg" >
+                        </div>
+                        <div class="img_description">
+                            <p>
+                                Платья спортивного стиля, повседневного и   фольклорного стилей характеризуются свободой  движений и практичностью. 
+                            </p>
+                            <!-- <div class="description_button">Описание</div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right_button" id="right" onclick="nextDres()">
+                <img src="img/right-arrow.png">
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
