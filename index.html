@@ -17,11 +17,9 @@
         let i = setInterval(function() {
                     var frameObj = document.getElementById("iframeAR");
                     
-                    console.log(frameObj.contentWindow.document.querySelector("#arjs-video"))
                     if (frameObj.contentWindow.document.querySelector("#arjs-video")){
                         clearInterval(i);
                         document.getElementById('load').style.display = 'none';
-                        alert(1)
                     }
                 }, 1);
 

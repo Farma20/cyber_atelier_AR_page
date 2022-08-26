@@ -8,9 +8,15 @@
 <!-- to load .ply model -->
 <script src="https://rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.loaders.min.js"></script>
 <style>
+    #playButtonDIV{
+        display: none;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
     #playButton {
-        margin-left: 35%;
-        margin-top: 50%;
         width: 48px;
         height: 50px;
         border: 0px solid black;
@@ -23,8 +29,10 @@
     #playButton img{
         height: 100%;
         width: 100%;
-        margin-left: 15%;
+        margin-left: 5px;
     }
+
+
 
 </style>
 <script>
@@ -35,12 +43,12 @@
     init: function () {
 
 
-        // let i = setInterval(function() {
-        //     if (document.querySelector("#arjs-video")){
-        //         clearInterval(i);
-        //         document.getElementById('playButtonDIV').style.display = 'flex';
-        //     }
-        // }, 1);
+        let i = setInterval(function() {
+            if (document.querySelector("#arjs-video")){
+                clearInterval(i);
+                document.getElementById('playButtonDIV').style.display = 'flex';
+            }
+        }, 1);
 
 
 
@@ -125,7 +133,7 @@
 <body id="MyBody" style='margin : 0px; overflow: hidden; font-family: Monospace;'>
 
 
-        <div id="playButtonDIV" style='position: fixed; top: 10px; left: 30px; width:100%; text-align: center; z-index: 1; justify-content: left; display: none;'>
+        <div id="playButtonDIV">
             <button class="video_button" id="playButton" style='left: 10px'>
                 <img src="./img/play3.png">
             </button>
@@ -162,7 +170,7 @@
         <!-- END: Add Image Target (marker) -->
         
             <!-- BEGIN: Unity Compiled Objects -->
-            <a-video id="AR_Video" width="5" height="7" src="#Video_Asset_0" class="intersectable" position="0 0.488 -1" rotation="-90 0 0" color="#FFFFFF"></a-video>
+            <a-video id="AR_Video" width="5" height="7" src="#Video_Asset_0" class="intersectable" position="0 0.488 -1" rotation="0 0 0" color="#FFFFFF"></a-video>
 
             <!-- <a-video id="AR_Video" width="5" height="7" src="#Video_Asset_1" class="intersectable" position="0 0.488 -1" rotation="-90 0 0" color="#FFFFFF"></a-video>
 
