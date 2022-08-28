@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="height=device-height,width=device-width" />
+
     <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
     <!-- include ar.js -->
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
@@ -14,6 +16,40 @@
 
     <script>
 
+        // function fullscreen() {
+        //     var isInFullScreen = (document.fullscreenElement && document.fullscreenElement !== null) ||
+        //         (document.webkitFullscreenElement && document.webkitFullscreenElement !== null) ||
+        //         (document.mozFullScreenElement && document.mozFullScreenElement !== null) ||
+        //         (document.msFullscreenElement && document.msFullscreenElement !== null);
+
+        //     var docElm = document.documentElement;
+        //     if (!isInFullScreen) {
+        //         if (docElm.requestFullscreen) {
+        //             docElm.requestFullscreen();
+        //         } else if (docElm.mozRequestFullScreen) {
+        //             docElm.mozRequestFullScreen();
+        //         } else if (docElm.webkitRequestFullScreen) {
+        //             docElm.webkitRequestFullScreen();
+        //         } else if (docElm.msRequestFullscreen) {
+        //             docElm.msRequestFullscreen();
+        //         }
+        //     } else {
+        //         if (document.exitFullscreen) {
+        //             document.exitFullscreen();
+        //         } else if (document.webkitExitFullscreen) {
+        //             document.webkitExitFullscreen();
+        //         } else if (document.mozCancelFullScreen) {
+        //             document.mozCancelFullScreen();
+        //         } else if (document.msExitFullscreen) {
+        //             document.msExitFullscreen();
+        //         }
+        //     }
+        // }
+
+
+
+
+
         let i = setInterval(function() {
                     var frameObj = document.getElementById("iframeAR");
                     
@@ -21,7 +57,7 @@
                         clearInterval(i);
                         document.getElementById('load').style.display = 'none';
                     }
-                }, 1);
+        }, 1);
 
 
 
@@ -75,7 +111,7 @@
                 }
                 
                 next();
-                setPosition(radios, value )
+                setPosition(radios, value)
             }
         
         function prevDres(){
@@ -130,11 +166,12 @@
                 }
             }
         }
-        </script>
+
+    </script>
     
     <title>Document</title>
 </head>
-<body>
+<body id="b" onload="">
 
 
 
@@ -143,10 +180,10 @@
 
 
 
-
-    <div class="AR">
-            <div class="circle" id="load"></div>
-            <iframe class="mainAR" id="iframeAR" src="ar-IOS.html"></iframe>
+    
+    <div id="AR" class="AR">
+            <div class="circle" id="load" ></div>
+            <iframe class="mainAR" id="iframeAR" src="ar-IOS.html" style="border: none;"></iframe>
     </div>
 
 
