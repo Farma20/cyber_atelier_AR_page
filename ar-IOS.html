@@ -47,7 +47,9 @@
         position: absolute;
         text-align: center;
         display: none;
-        flex-flow: row-reverse wrap-reverse;
+        flex-direction: row-reverse;
+        margin-right: 15px;
+        margin-top: 15px;
         
     }
     #FullScreenButton{
@@ -92,8 +94,35 @@
         text-align: center;
     }
 
+    #scene{
+        z-index: -1;
+    }
+
+    .touch{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
 </style>
 <script>
+
+    var fullscreenIOS = 0;
+    window.addEventListener("orientationchange", function() {
+        let isSafari = navigator.vendor.match(/apple/i) &&
+                !navigator.userAgent.match(/crios/i) &&
+                !navigator.userAgent.match(/fxios/i) &&
+                !navigator.userAgent.match(/Opera|OPT\//);
+
+
+        if (!isSafari && fullscreenIOS == 1) {
+    
+            window.parent.postMessage('1');
+                    
+        }
+    }, false);
+
+
     function modal_window_timer(){
         time = 3
         document.getElementById('modal-wind').style.marginTop = "-10px";
@@ -106,51 +135,90 @@
 
         }, 1000)
     }
-
+    
     
     function fullscreen() {
-                var isInFullScreen = (document.fullscreenElement && document.fullscreenElement !== null) ||
+
+                let isSafari = navigator.vendor.match(/apple/i) &&
+                !navigator.userAgent.match(/crios/i) &&
+                !navigator.userAgent.match(/fxios/i) &&
+                !navigator.userAgent.match(/Opera|OPT\//);
+
+                
+
+
+
+                if (!isSafari) {
+
+                    var button = document.getElementById('imgBTN');
+
+                    if(fullscreenIOS == 0){
+                        fullscreenIOS = 1;
+                        window.parent.postMessage('1');
+                        button.style.width = "120%"
+                        button.style.height = "90%";
+                        button.style.marginBottom = '0px';
+                        button.src = 'img/standart-size.png';
+                        modal_window_timer()
+                    }
+                    else{
+                        fullscreenIOS = 0;
+                        window.parent.postMessage('0');
+                        button.style.width = "190%"
+                        button.style.height = "150%";
+                        button.style.marginBottom = '3px';
+                        button.src = 'img/full-size2.png';
+                    }
+
+                } else {
+                    
+                    var isInFullScreen = (document.fullscreenElement && document.fullscreenElement !== null) ||
                     (document.webkitFullscreenElement && document.webkitFullscreenElement !== null) ||
                     (document.mozFullScreenElement && document.mozFullScreenElement !== null) ||
                     (document.msFullscreenElement && document.msFullscreenElement !== null);
 
-                var button = document.getElementById('imgBTN');
-                var docElm = document.documentElement;
-                if (!isInFullScreen) {
-                    button.style.width = "120%"
-                    button.style.height = "90%";
-                    button.style.marginBottom = '0px';
-                    button.src = 'img/standart-size.png';
+                    var button = document.getElementById('imgBTN');
+                    var docElm = document.documentElement;
+                    if (!isInFullScreen) {
+                        button.style.width = "120%"
+                        button.style.height = "90%";
+                        button.style.marginBottom = '0px';
+                        button.src = 'img/standart-size.png';
 
-                    modal_window_timer()
+                        modal_window_timer()
 
-                    if (docElm.requestFullscreen) {
-                        docElm.requestFullscreen();
-                    } else if (docElm.mozRequestFullScreen) {
-                        docElm.mozRequestFullScreen();
-                    } else if (docElm.webkitRequestFullScreen) {
-                        docElm.webkitRequestFullScreen();
-                    } else if (docElm.msRequestFullscreen) {
-                        docElm.msRequestFullscreen();
-                    }
+                        if (docElm.requestFullscreen) {
+                            docElm.requestFullscreen();
+                        } else if (docElm.mozRequestFullScreen) {
+                            docElm.mozRequestFullScreen();
+                        } else if (docElm.webkitRequestFullScreen) {
+                            docElm.webkitRequestFullScreen();
+                        } else if (docElm.msRequestFullscreen) {
+                            docElm.msRequestFullscreen();
+                        }
 
-                } else {
-                    button.style.width = "190%"
-                    button.style.height = "150%";
-                    button.style.marginBottom = '3px';
-                    button.src = 'img/full-size2.png';
+                    } else {
+                        button.style.width = "190%"
+                        button.style.height = "150%";
+                        button.style.marginBottom = '3px';
+                        button.src = 'img/full-size2.png';
 
 
-                    if (document.exitFullscreen) {
-                        document.exitFullscreen();
-                    } else if (document.webkitExitFullscreen) {
-                        document.webkitExitFullscreen();
-                    } else if (document.mozCancelFullScreen) {
-                        document.mozCancelFullScreen();
-                    } else if (document.msExitFullscreen) {
-                        document.msExitFullscreen();
+                        if (document.exitFullscreen) {
+                            document.exitFullscreen();
+                        } else if (document.webkitExitFullscreen) {
+                            document.webkitExitFullscreen();
+                        } else if (document.mozCancelFullScreen) {
+                            document.mozCancelFullScreen();
+                        } else if (document.msExitFullscreen) {
+                            document.msExitFullscreen();
+                        }
                     }
                 }
+
+
+
+                
             }
 
     var markerFound = 0;
@@ -196,6 +264,8 @@
         firstEnter = true;
 
         videoButton[0].addEventListener('click', function(evt){
+                let music = document.getElementById('music')
+                music.play()
                 document.getElementById('playButtonDIV').style.display = 'none';
                 Video[curVideo].muted = false;
                 firstEnter = false;
@@ -250,6 +320,7 @@
 <!-- BEGIN: Middle HTML -->
 <body id="MyBody" style='margin : 0px; overflow: hidden; font-family: Monospace;'>
 
+        <audio id="music" src="music/music1.mp3"></audio>
 
         <div id="playButtonDIV" style="display: none">
             <button class="video_button" id="playButton" style='left: 10px;'>
@@ -263,6 +334,9 @@
                 <img id="imgBTN" src="img/full-size2.png" alt="">
             </button>
         </div>
+
+
+        <div class="touch"></div>
 
         
 

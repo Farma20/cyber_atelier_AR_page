@@ -16,39 +16,23 @@
 
     <script>
 
-        // function fullscreen() {
-        //     var isInFullScreen = (document.fullscreenElement && document.fullscreenElement !== null) ||
-        //         (document.webkitFullscreenElement && document.webkitFullscreenElement !== null) ||
-        //         (document.mozFullScreenElement && document.mozFullScreenElement !== null) ||
-        //         (document.msFullscreenElement && document.msFullscreenElement !== null);
-
-        //     var docElm = document.documentElement;
-        //     if (!isInFullScreen) {
-        //         if (docElm.requestFullscreen) {
-        //             docElm.requestFullscreen();
-        //         } else if (docElm.mozRequestFullScreen) {
-        //             docElm.mozRequestFullScreen();
-        //         } else if (docElm.webkitRequestFullScreen) {
-        //             docElm.webkitRequestFullScreen();
-        //         } else if (docElm.msRequestFullscreen) {
-        //             docElm.msRequestFullscreen();
-        //         }
-        //     } else {
-        //         if (document.exitFullscreen) {
-        //             document.exitFullscreen();
-        //         } else if (document.webkitExitFullscreen) {
-        //             document.webkitExitFullscreen();
-        //         } else if (document.mozCancelFullScreen) {
-        //             document.mozCancelFullScreen();
-        //         } else if (document.msExitFullscreen) {
-        //             document.msExitFullscreen();
-        //         }
-        //     }
-        // }
+        window.addEventListener('message', function(event) {
+            if(event.data == '1'){
+                var d = setTimeout(function(){
+                    document.getElementsByClassName('color_slider')[0].style.display = 'none';
+                console.log('ok')
+                document.getElementById('AR').style.height = window.outerHeight+'px';
+                }, 100)
+                
+            }
+            else{
+                document.getElementsByClassName('color_slider')[0].style.display = 'flex';
+                console.log('no')
+                document.getElementById('AR').style.height = '550px';
+            }
 
 
-
-
+        });
 
         let i = setInterval(function() {
                     var frameObj = document.getElementById("iframeAR");
@@ -172,14 +156,6 @@
     <title>Document</title>
 </head>
 <body id="b" onload="">
-
-
-
-<!-- END: Top HTML -->
-<!-- BEGIN: Unity Compiled Events -->
-
-
-
     
     <div id="AR" class="AR">
             <div class="circle" id="load" ></div>
