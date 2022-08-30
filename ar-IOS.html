@@ -115,7 +115,7 @@
                 !navigator.userAgent.match(/Opera|OPT\//);
 
 
-        if (!isSafari && fullscreenIOS == 1) {
+        if (isSafari && fullscreenIOS == 1) {
     
             window.parent.postMessage('1');
                     
@@ -148,7 +148,7 @@
 
 
 
-                if (!isSafari) {
+                if (isSafari) {
 
                     var button = document.getElementById('imgBTN');
 
