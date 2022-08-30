@@ -1,0 +1,165 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+}
+
+.main{
+    display: flex;
+    flex-direction: column;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+.returning_url_div{
+    display: flex;
+}
+
+.returning_url_div a{
+    font-weight: 400;
+    line-height: 21px;
+    font-size: calc(8px + 12 * (100vw / 1920));
+
+    text-decoration-line: underline;
+
+    color: #74CCCB;
+}
+
+.label_div{
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.page_name{
+    font-weight: 900;
+    font-size: 48px;
+
+    text-transform: uppercase;
+
+    color: #0F0F0E;
+}
+
+.dress_name{
+    margin-left: 2%;
+    font-weight: 900;
+    font-size: 32px;
+    line-height: 38px;
+
+    text-transform: uppercase;
+
+    color: #74CCCB;
+}
+
+.description_div{
+    margin-top: 25px;
+}
+
+.description{
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 150%;
+
+    color: #0F0F0E;
+}
+
+.AR_div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    height: 735px;
+    margin-top: 35px;
+
+    border: 1px solid #0F0F0E;
+}
+
+.mainAR{
+    width: 100%;
+    height: 100%;
+
+    border: none;
+}
+
+.decoration{
+    display: flex;
+    align-items: center;
+    align-content: stretch;
+
+    margin-top: 35px;
+}
+
+.decoration p{
+    font-weight: 900;
+    font-size: 36px;
+    line-height: 42px;
+    text-transform: uppercase;
+
+    color: #0F0F0E;
+}
+
+.blue_line{
+    height: 18px;
+    flex-grow: 1;
+
+    margin-left: 35px;
+
+    background: #74CCCB;
+}
+
+.slider_div{
+    display: flex;
+
+    margin-top: 35px;
+}
+
+.left_button, .right_button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left_button img, .right_button img{
+    width: 25px;
+}
+
+
+.place_slider_div{
+    overflow: hidden;
+}
+
+.dress_div{
+    display: flex;
+    flex-grow: 1;
+}
+
+
+.dress_main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 215px;
+
+    margin-left: 40px;
+    margin-right: 40px;
+
+    border: 1px solid #0F0F0E;
+}
+
+.dress_main img{
+    width: 100%;
+}
+
+.dress_main p{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    text-transform: uppercase;
+
+    color: #0F0F0E;
+}
