@@ -34,6 +34,18 @@
     margin-top: 15px;
 }
 
+.page_name_div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dress_name_div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .page_name{
     font-weight: 900;
     font-size: 48px;
@@ -187,6 +199,12 @@ input[name="r"]{
     border-top-color: rgb(49, 44, 44);
 }
 
+#mobile_dress_name{
+    display: none;
+}
+
+
+
 @keyframes effect {
     0% {
         transform: rotate(0deg);
@@ -198,3 +216,102 @@ input[name="r"]{
 
 }
 
+@media screen and (max-width: 950px) {
+    .label_div{
+        justify-content: center;
+        background-color: #74CCCB;
+        order: -5;
+
+        margin-left: -3%;
+        margin-right: -3%;
+    }
+
+    .page_name{
+        font-size: 36px;
+        line-height: 42px;
+
+        background-color: #74CCCB;
+    }
+
+    .dress_name{
+        display: none;
+    }
+
+    .AR_div{
+        order: -4;
+
+        height: 635px;
+    }
+
+    .returning_url_div{
+        justify-content: center;
+        align-items: center;
+        order: -2;
+
+        text-transform: uppercase;
+    }
+
+    .returning_url_div a{
+        visibility: hidden;
+    }
+
+    .returning_url_div a::after{
+        display: block;
+        visibility: visible;
+
+        margin-left: 10px;
+
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18.236px;
+        line-height: 21px;
+        text-align: center;
+
+        content: 'ПЕРЕЙТИ К КАРТОЧКЕ ТОВАРА';
+    }
+
+    .description_div{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        order: -3;
+    }
+
+    .description{
+        margin-top: 15px;
+
+        text-align: center;
+        font-weight: 300;
+        font-size: 15px;
+    }
+
+    .line{
+        margin-left: -3%;
+        margin-right: -3%;
+        margin-top: 35px;
+    
+        border-bottom:1px solid rgb(0, 0, 0);;
+    }
+
+    #mobile_dress_name{
+        display:block;
+        
+        text-align: center;
+        font-size: 24px;
+        line-height: 28px;
+    }
+
+    .decoration{
+        justify-content: center;
+        
+        text-align: center;
+        font-size: 24px;
+        line-height: 28px;
+    }
+
+    .blue_line{
+        display: none;
+    }
+
+}
