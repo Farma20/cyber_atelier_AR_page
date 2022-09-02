@@ -12,6 +12,94 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,900;1,100;1,300&display=swap" rel="stylesheet">
     <title>AR подиум</title>
 </head>
+<script>
+
+    // Следующий выбор платьев
+    function next_button(){
+        let radios = document.querySelectorAll('input[type="radio"]');
+        let radiosLen = radios.length;
+        let value = 0;
+        let max_value = 4
+
+        for (let radio of radios) {
+            if (radio.checked) {;
+                value = radio.value;
+                radio.checked = false;
+            }
+        }
+        value = Number(value) + 1;
+        
+        if(value > max_value){
+            value = 1;
+        }
+        set_position(radios, value)
+    }
+
+    // Предыдущий выбор платьев
+    function prev_button(){
+        
+        let radios = document.querySelectorAll('input[type="radio"]');
+        let radiosLen = radios.length;
+        let value = 0;
+        let max_value = 4
+
+        for (let radio of radios) {
+            if (radio.checked) {;
+                value = radio.value;
+                radio.checked = false;
+            }
+        }
+        value = Number(value) - 1;
+        
+        if(value == 0){
+            value = max_value;
+        }
+        set_position(radios, value)
+    }
+
+    // Смена позиции слайдера
+    function set_position(radios, value){
+        
+        let dress_div = getComputedStyle(document.getElementById("d_m")).marginLeft;
+        let dress_img = getComputedStyle(document.getElementById("d_i")).width;
+
+        dress_div = Number(dress_div.replace('px', ''))
+        dress_img = Number(dress_img.replace('px', ''))
+
+        
+        let width = dress_div * 10 + dress_img * 5;
+        
+
+        for (let radio of radios) {
+            if(radio.value == value){
+                radio.checked = true;
+
+                if(radio.value == 1){
+                    document.getElementById("slide").style.marginLeft = '0';
+                }
+                else if(radio.value == 4){
+                    var shift = width * 2 + dress_div * 2 + dress_img;
+                    document.getElementById("slide").style.marginLeft = -shift+"px";
+                }
+                else {
+                    var shift = width * (radio.value - 1);
+                    document.getElementById("slide").style.marginLeft = -shift+"px";
+                }
+                
+            }
+        }     
+    }
+
+    // Скрытыие круга закгрузки
+    let i = setInterval(function() {
+                    var frameObj = document.getElementById("iframeAR");
+                    
+                    if (frameObj.contentWindow.document.querySelector("#arjs-video")){
+                        clearInterval(i);
+                        document.getElementById('load').style.display = 'none';
+                    }
+        }, 1);
+</script>
 <body>
     <div class="main">
         <div class="returning_url_div">
@@ -28,7 +116,8 @@
         </div>
 
         <div class="AR_div">
-            <!-- <iframe class="mainAR" id="iframeAR" src="ar-IOS.html"></iframe> -->
+            <div class="circle" id="load" ></div>
+            <iframe class="mainAR" id="iframeAR" src="ar-IOS.html"></iframe>
         </div>
 
         <div class="decoration">
@@ -37,11 +126,43 @@
         </div>
 
         <div class="slider_div">
-            <div class="left_button">
+            <div class="left_button" onclick="prev_button()">
                 <img src="img/left-arrow.png">
             </div>
             <div class="place_slider_div">
-                <div class="dress_div">
+
+                <input type="radio" name="r" id="dress1" value="1" checked>
+                <input type="radio" name="r" id="dress2" value="2">
+                <input type="radio" name="r" id="dress3" value="3">
+                <input type="radio" name="r" id="dress4" value="4">
+
+
+                <div class="dress_div" id="slide">
+                    <div class="dress_main" id="d_m">
+                        <img src="img/image1.svg" id="d_i">
+                        <p class="dress_name">Alexander Varlakov Limited</p>
+                    </div>
+                    <div class="dress_main">
+                        <img src="img/image2.svg">
+                        <p class="dress_name">Goranskaya L</p>
+                    </div>
+                    <div class="dress_main">
+                        <img src="img/image3.svg">
+                        <p class="dress_name">LOPKHAN</p>
+                    </div>
+                    <div class="dress_main">
+                        <img src="img/image1.svg">
+                        <p class="dress_name">Alexander Varlakov Limited</p>
+                    </div>
+                    <div class="dress_main">
+                        <img src="img/image4.svg">
+                        <p class="dress_name">Goranskaya L</p>
+                    </div>
+                    <div class="dress_main">
+                        <img src="img/image4.svg">
+                        <p class="dress_name">Goranskaya L</p>
+                    </div>
+
                     <div class="dress_main">
                         <img src="img/image1.svg">
                         <p class="dress_name">Alexander Varlakov Limited</p>
@@ -62,9 +183,31 @@
                         <img src="img/image4.svg">
                         <p class="dress_name">Goranskaya L</p>
                     </div>
-                </div>
+
+                    <div class="dress_main">
+                        <img src="img/image4.svg">
+                        <p class="dress_name">Goranskaya L</p>
+                    </div>
+
+                    <div class="dress_main">
+                        <img src="img/image1.svg">
+                        <p class="dress_name">Alexander Varlakov Limited</p>
+                    </div>
+                    <div class="dress_main">
+                        <img src="img/image2.svg">
+                        <p class="dress_name">Goranskaya L</p>
+                    </div>
+                    <div class="dress_main">
+                        <img src="img/image3.svg">
+                        <p class="dress_name">LOPKHAN</p>
+                    </div>
+                    <div class="dress_main">
+                        <img src="img/image1.svg">
+                        <p class="dress_name">Alexander Varlakov Limited</p>
+                    </div>
+                </div>    
             </div>
-            <div class="right_button">
+            <div class="right_button" onclick="next_button();">
                 <img src="img/right-arrow.png">
             </div>
         </div>
