@@ -18,6 +18,7 @@
     display: flex;
 }
 
+
 .returning_url_div a{
     font-weight: 400;
     line-height: 21px;
@@ -50,12 +51,14 @@
     font-weight: 900;
     font-size: 48px;
 
+    margin: 5px;
+
     text-transform: uppercase;
 
     color: #0F0F0E;
 }
 
-.dress_name{
+.dress_name_main{
     margin-left: 2%;
     font-weight: 900;
     font-size: 32px;
@@ -144,7 +147,7 @@
 
 .place_slider_div{
     display: flex;
-
+    
     overflow: hidden;
 }
 
@@ -203,6 +206,10 @@ input[name="r"]{
     display: none;
 }
 
+.come_back_div{
+    display: none;
+}
+
 
 
 @keyframes effect {
@@ -216,6 +223,13 @@ input[name="r"]{
 
 }
 
+
+
+
+
+
+
+/* Мобильная адаптация */
 @media screen and (max-width: 950px) {
     .label_div{
         justify-content: center;
@@ -233,7 +247,7 @@ input[name="r"]{
         background-color: #74CCCB;
     }
 
-    .dress_name{
+    .dress_name_main{
         display: none;
     }
 
@@ -305,13 +319,76 @@ input[name="r"]{
     .decoration{
         justify-content: center;
         
+        margin-top: calc((100vw /100) * 5);
+    }
+
+    .decoration p{
         text-align: center;
-        font-size: 24px;
+        font-size: calc((100vw /100) * 5);
         line-height: 28px;
     }
 
     .blue_line{
         display: none;
+    }
+
+    .place_slider_div{
+        overflow-x:scroll;
+    }
+
+    .place_slider_div{
+        -ms-overflow-style: none;
+    }
+
+    .place_slider_div::-webkit-scrollbar{
+        display: none;
+    }
+
+    .left_button, .right_button {
+        display: none;
+    }
+
+    .dress_main{
+        margin-left: calc((100vw /100) * 2.5);
+        margin-right: calc((100vw /100) * 2.5);
+    }
+
+    .dress_name{
+        margin-top: 10px;
+
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 16px;
+    }
+    
+    .dress_main img{
+        width: calc((100vw /100) * 40);
+    }
+
+    .slider_div{
+        margin-top: calc((100vw /100) * 5);
+        margin-left: -3%;
+        margin-right: -3%;
+    }
+
+    .come_back_div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        margin-bottom: 30px;
+
+        background-color: #74CCCB;
+    }
+
+    .come_back_div a{
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 21px;
+        text-transform: uppercase;
+        margin: 5px;
+
+        color: white;
     }
 
 }

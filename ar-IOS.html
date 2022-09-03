@@ -265,6 +265,7 @@
 
         videoButton[0].addEventListener('click', function(evt){
                 let music = document.getElementById('music')
+                music.volume = 0.3;
                 music.play()
                 document.getElementById('playButtonDIV').style.display = 'none';
                 Video[curVideo].muted = false;
@@ -272,12 +273,7 @@
                 Video[curVideo].play();  
         })
 
-        // videoButton[1].addEventListener('click', function(evt){
-        //     Video[curVideo].pause();
-        // })
-        
-
-        
+                
 
         marker.addEventListener("markerFound", function (evt) {
             markerFound = 1;
@@ -366,11 +362,11 @@
         <!-- END: Unity Compiled Assets -->
 
         <!-- BEGIN: Add Image Target (marker) // type = 'pattern' url = 'pattern-Atelier.patt' -->
-        <a-marker id="marker" preset="hiro"  emitevents="true" button>
+        <a-marker id="marker" preset="custom" type = 'pattern' url = 'marker/cyber-p.patt' emitevents="true" button>
         <!-- END: Add Image Target (marker) -->
         
             <!-- BEGIN: Unity Compiled Objects -->
-            <a-video id="AR_Video" width="5" height="7" src="#Video_Asset_0" class="intersectable" position="0 0.488 -1" rotation="0 0 0" color="#FFFFFF"></a-video>
+            <a-video id="AR_Video" width="5" height="7" src="#Video_Asset_0" class="intersectable" position="0 0 1" rotation="-90 0 0" color="#FFFFFF"></a-video>
 
             <!-- <a-video id="AR_Video" width="5" height="7" src="#Video_Asset_1" class="intersectable" position="0 0.488 -1" rotation="-90 0 0" color="#FFFFFF"></a-video>
 
