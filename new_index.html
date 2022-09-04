@@ -90,16 +90,22 @@
         }     
     }
 
-    // Скрытыие круга закгрузки
+    // Скрытыие круга закгрузки при загрузки вебкамеры
     let j = setInterval(function() {
                     var frameObj = document.getElementById("iframeAR");
                     
                     if (frameObj.contentWindow.document.querySelector("#arjs-video")){
                         clearInterval(j);
                         document.getElementById('load').style.display = 'none';
+
+                        // id видео при первой загрузки страницы
+                        let id = 1
+                        set_videos(id)
+                        set_description(id)
+
+                        document.getElementById(String(id)).style.backgroundColor = '#74CCCB';
                     }
         }, 1);
-    
     
     // Смена цвета блока при нажатии и смена видео
     let set_dress_color = function(){
@@ -112,6 +118,7 @@
         this.style.backgroundColor = '#74CCCB';
 
         set_videos(this.id)
+        set_description(this.id)
     }
 
     // Добавление слушателей на блоки с одеждой
@@ -131,30 +138,77 @@
             var marker = frameObj.contentWindow.document.querySelector("#marker");
             marker.object3D.visible = false;
 
-            let current_video = id
-
+            let current_video = String(id) 
             video.src = current_video+'.webm'
     }
 
-    //Слушатель срабатывающий при сменене ориентации телефона в fullscreen режиме
-    window.addEventListener('message', function(event) {
-            if(event.data == '1'){
-                var d = setTimeout(function(){
-                    document.getElementsByClassName('color_slider')[0].style.display = 'none';
-                console.log('ok')
-                document.getElementById('AR_div').style.height = window.outerHeight+'px';
-                }, 100)
-                
+
+    // Смена описания
+    function set_description(id){
+        id = Number(id)
+
+        let all_description = document.getElementsByClassName('description_main');
+        let all_name_desctop = document.getElementsByClassName('dress_name_main');
+        
+        for(let i = 0; i < all_description.length; i++){
+            if(i+1 == id){
+                all_description[i].style.display = 'inline';
+                console.log(window.innerWidth)
+                if (window.outerWidth > 950){
+                    console.log(1)
+                    all_name_desctop[i].style.display = 'inline';
+                }
             }
             else{
-                document.getElementsByClassName('color_slider')[0].style.display = 'flex';
-                console.log('no')
-                document.getElementById('AR_div').style.height = '550px';
+                all_description[i].style.display = 'none';
+                all_name_desctop[i].style.display = 'none';
             }
+        }
+    }
+
+    // Замечательнейшая адаптация фулскрин режима, которую приходится 
+    // делать вручную, так как на моем любимом айфоне он не предусмотрен
+    window.addEventListener('message', function(event) {
+        let main_block = document.getElementsByClassName('main')[0];
+        let all_blocks = main_block.childNodes
+
+        if(event.data == '1'){
+
+            var d = setTimeout(function(){
+                
+                for(let i = 0; i < all_blocks.length; i++){
+                    if(all_blocks[i].className != "AR_div" && all_blocks[i].tagName == "DIV"){
+                        all_blocks[i].style.display = 'none';
+                    }
+
+                    if(all_blocks[i].className == "AR_div"){
+                        all_blocks[i].style.height = window.innerHeight+'px';
+                        all_blocks[i].style.margin = '0';
+
+                        main_block.style.margin = '0';
+                    }
+                }
+            }, 100)
+            
+        }
+        else{
+            for(let i = 0; i < all_blocks.length; i++){
+                    if(all_blocks[i].className != "AR_div" && all_blocks[i].tagName == "DIV"){
+                        all_blocks[i].style.display = 'flex';
+                    }
+
+                    if(all_blocks[i].className == "AR_div"){
+                        all_blocks[i].style.height = '635px';
+
+                        all_blocks[i].style.marginTop = '35px';
+                        main_block.style.marginLeft = '3%';
+                        main_block.style.marginRight = '3%';
+                    }
+                }
+        }
 
 
-        });
-
+    });
 
 
 </script>
@@ -166,12 +220,105 @@
 
         <div class="label_div">
             <div class="page_name">ar-подиум</div>
-            <div class="dress_name_main">платье Goranskaya L</div>
+            <div class="dress_name_main">платье Goranskaya 1</div>
+            <div class="dress_name_main">платье Goranskaya 2</div>
+            <div class="dress_name_main">платье Goranskaya 3</div>
+            <div class="dress_name_main">платье Goranskaya 4</div>
+            <div class="dress_name_main">платье Goranskaya 5</div>
+            <div class="dress_name_main">платье Goranskaya 6</div>
+            <div class="dress_name_main">платье Goranskaya 7</div>
+            <div class="dress_name_main">платье Goranskaya 8</div>
+            <div class="dress_name_main">платье Goranskaya 9</div>
+            <div class="dress_name_main">платье Goranskaya 10</div>
+            <div class="dress_name_main">платье Goranskaya 11</div>
+            <div class="dress_name_main">платье Goranskaya 12</div>
+            <div class="dress_name_main">платье Goranskaya 13</div>
+            <div class="dress_name_main">платье Goranskaya 14</div>
+            <div class="dress_name_main">платье Goranskaya 15</div>
+            <div class="dress_name_main">платье Goranskaya 16</div>
         </div>
 
         <div class="description_div">
-            <div class="dress_name" id="mobile_dress_name">платье Goranskaya L</div>
-            <div class="description">Платье выполнено в сочетании морского и спортивного стиля. Широкие трикотажные брюки, красно-белая тельняшка с вышивкой-аппликацией «Тигр» и жилет из трикотажного полотна дополняет образ и подчеркивает Приморский характер.</div>
+            <div class="description_main">
+                <div class="dress_name" id="mobile_dress_name">платье Goranskaya 1</div>
+                <div class="description">Платье выполнено в сочетании морского и спортивного стиля. Широкие трикотажные брюки, красно-белая тельняшка с вышивкой-аппликацией «Тигр» и жилет из трикотажного полотна дополняет образ и подчеркивает Приморский характер.</div>
+            </div>
+
+            <div class="description_main">
+                <div class="dress_name" id="mobile_dress_name">платье Goranskaya 2</div>
+                <div class="description">Платье выполнено в сочетании морского и спортивного стиля. Широкие трикотажные брюки, красно-белая тельняшка с вышивкой-аппликацией «Тигр» и жилет из трикотажного полотна дополняет образ и подчеркивает Приморский характер.</div>
+            </div>
+
+            <div class="description_main">
+                <div class="dress_name" id="mobile_dress_name">платье Goranskaya 3</div>
+                <div class="description">Платье выполнено в сочетании морского и спортивного стиля. Широкие трикотажные брюки, красно-белая тельняшка с вышивкой-аппликацией «Тигр» и жилет из трикотажного полотна дополняет образ и подчеркивает Приморский характер.</div>
+            </div>
+
+            <div class="description_main">
+                <div class="dress_name" id="mobile_dress_name">платье Goranskaya 4</div>
+                <div class="description">Платье выполнено в сочетании морского и спортивного стиля. Широкие трикотажные брюки, красно-белая тельняшка с вышивкой-аппликацией «Тигр» и жилет из трикотажного полотна дополняет образ и подчеркивает Приморский характер.</div>
+            </div>
+
+            <div class="description_main">
+                <div class="dress_name" id="mobile_dress_name">платье Goranskaya 5</div>
+                <div class="description">Платье выполнено в сочетании морского и спортивного стиля. Широкие трикотажные брюки, красно-белая тельняшка с вышивкой-аппликацией «Тигр» и жилет из трикотажного полотна дополняет образ и подчеркивает Приморский характер.</div>
+            </div>
+
+            <div class="description_main">
+                <div class="dress_name" id="mobile_dress_name">платье Goranskaya 6</div>
+                <div class="description">Платье выполнено в сочетании морского и спортивного стиля. Широкие трикотажные брюки, красно-белая тельняшка с вышивкой-аппликацией «Тигр» и жилет из трикотажного полотна дополняет образ и подчеркивает Приморский характер.</div>
+            </div>
+
+            <div class="description_main">
+                <div class="dress_name" id="mobile_dress_name">платье Goranskaya 7</div>
+                <div class="description">Платье выполнено в сочетании морского и спортивного стиля. Широкие трикотажные брюки, красно-белая тельняшка с вышивкой-аппликацией «Тигр» и жилет из трикотажного полотна дополняет образ и подчеркивает Приморский характер.</div>
+            </div>
+
+            <div class="description_main">
+                <div class="dress_name" id="mobile_dress_name">платье Goranskaya 8</div>
+                <div class="description">Платье выполнено в сочетании морского и спортивного стиля. Широкие трикотажные брюки, красно-белая тельняшка с вышивкой-аппликацией «Тигр» и жилет из трикотажного полотна дополняет образ и подчеркивает Приморский характер.</div>
+            </div>
+
+            <div class="description_main">
+                <div class="dress_name" id="mobile_dress_name">платье Goranskaya 9</div>
+                <div class="description">Платье выполнено в сочетании морского и спортивного стиля. Широкие трикотажные брюки, красно-белая тельняшка с вышивкой-аппликацией «Тигр» и жилет из трикотажного полотна дополняет образ и подчеркивает Приморский характер.</div>
+            </div>
+
+            <div class="description_main">
+                <div class="dress_name" id="mobile_dress_name">платье Goranskaya 10</div>
+                <div class="description">Платье выполнено в сочетании морского и спортивного стиля. Широкие трикотажные брюки, красно-белая тельняшка с вышивкой-аппликацией «Тигр» и жилет из трикотажного полотна дополняет образ и подчеркивает Приморский характер.</div>
+            </div>
+
+            <div class="description_main">
+                <div class="dress_name" id="mobile_dress_name">платье Goranskaya 11</div>
+                <div class="description">Платье выполнено в сочетании морского и спортивного стиля. Широкие трикотажные брюки, красно-белая тельняшка с вышивкой-аппликацией «Тигр» и жилет из трикотажного полотна дополняет образ и подчеркивает Приморский характер.</div>
+            </div>
+
+            <div class="description_main">
+                <div class="dress_name" id="mobile_dress_name">платье Goranskaya 12</div>
+                <div class="description">Платье выполнено в сочетании морского и спортивного стиля. Широкие трикотажные брюки, красно-белая тельняшка с вышивкой-аппликацией «Тигр» и жилет из трикотажного полотна дополняет образ и подчеркивает Приморский характер.</div>
+            </div>
+
+            <div class="description_main">
+                <div class="dress_name" id="mobile_dress_name">платье Goranskaya 13</div>
+                <div class="description">Платье выполнено в сочетании морского и спортивного стиля. Широкие трикотажные брюки, красно-белая тельняшка с вышивкой-аппликацией «Тигр» и жилет из трикотажного полотна дополняет образ и подчеркивает Приморский характер.</div>
+            </div>
+
+            <div class="description_main">
+                <div class="dress_name" id="mobile_dress_name">платье Goranskaya 14</div>
+                <div class="description">Платье выполнено в сочетании морского и спортивного стиля. Широкие трикотажные брюки, красно-белая тельняшка с вышивкой-аппликацией «Тигр» и жилет из трикотажного полотна дополняет образ и подчеркивает Приморский характер.</div>
+            </div>
+
+            <div class="description_main">
+                <div class="dress_name" id="mobile_dress_name">платье Goranskaya 15</div>
+                <div class="description">Платье выполнено в сочетании морского и спортивного стиля. Широкие трикотажные брюки, красно-белая тельняшка с вышивкой-аппликацией «Тигр» и жилет из трикотажного полотна дополняет образ и подчеркивает Приморский характер.</div>
+            </div>
+
+            <div class="description_main">
+                <div class="dress_name" id="mobile_dress_name">платье Goranskaya 16</div>
+                <div class="description">Платье выполнено в сочетании морского и спортивного стиля. Широкие трикотажные брюки, красно-белая тельняшка с вышивкой-аппликацией «Тигр» и жилет из трикотажного полотна дополняет образ и подчеркивает Приморский характер.</div>
+            </div>
+
         </div>
 
         <div class="AR_div">
@@ -197,7 +344,7 @@
 
 
                 <div class="dress_div" id="slide">
-                    <div class="dress_main" id="1" style="background-color: #74CCCB;">
+                    <div class="dress_main" id="1">
                         <img src="img/image1.svg" id="d_i">
                         <p class="dress_name">Alexander Varlakov Limited</p>
                     </div>

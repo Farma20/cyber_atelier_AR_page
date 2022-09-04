@@ -50,7 +50,6 @@
         flex-direction: row-reverse;
         margin-right: 15px;
         margin-top: 15px;
-        
     }
     #FullScreenButton{
         z-index: 1;
@@ -64,8 +63,8 @@
     }
 
     #FullScreenButton img{
-        width: 190%;
-        height: 150%;
+        width: 170%;
+        height:auto;
         margin-bottom: 3px;
     }
 
@@ -155,8 +154,8 @@
                     if(fullscreenIOS == 0){
                         fullscreenIOS = 1;
                         window.parent.postMessage('1');
-                        button.style.width = "120%"
-                        button.style.height = "90%";
+                        button.style.width = "170%"
+                        button.style.height = "auto";
                         button.style.marginBottom = '0px';
                         button.src = 'img/standart-size.png';
                         modal_window_timer()
@@ -164,8 +163,8 @@
                     else{
                         fullscreenIOS = 0;
                         window.parent.postMessage('0');
-                        button.style.width = "190%"
-                        button.style.height = "150%";
+                        button.style.width = "170%"
+                        button.style.height = "auto";
                         button.style.marginBottom = '3px';
                         button.src = 'img/full-size2.png';
                     }

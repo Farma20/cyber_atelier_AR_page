@@ -64,6 +64,8 @@
     font-size: 32px;
     line-height: 38px;
 
+    display: none;
+
     text-transform: uppercase;
 
     color: #74CCCB;
@@ -100,6 +102,7 @@
 }
 
 .decoration{
+    position: relative;
     display: flex;
     align-items: center;
     align-content: stretch;
@@ -207,6 +210,29 @@ input[name="r"]{
 }
 
 .come_back_div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    margin-bottom: 30px;
+    margin-left: 30%;
+    margin-right: 30%;
+
+    background-color: #74CCCB;
+}
+
+.come_back_div a{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    text-transform: uppercase;
+    
+    margin: 5px;
+
+    color: white;
+}
+
+.description_main{
     display: none;
 }
 
@@ -377,6 +403,8 @@ input[name="r"]{
         justify-content: center;
 
         margin-bottom: 30px;
+        margin-left: 0;
+        margin-right: 0;
 
         background-color: #74CCCB;
     }
