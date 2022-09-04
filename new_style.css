@@ -288,6 +288,8 @@ input[name="r"]{
         align-items: center;
         order: -2;
 
+        margin-top: 30px;
+
         text-transform: uppercase;
     }
 
