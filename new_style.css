@@ -292,23 +292,14 @@ input[name="r"]{
     }
 
     .returning_url_div a{
-        visibility: hidden;
-    }
-
-    .returning_url_div a::after{
-        display: block;
-        visibility: visible;
-
-        margin-left: 10px;
-
         font-style: normal;
         font-weight: 400;
         font-size: 18.236px;
         line-height: 21px;
         text-align: center;
-
-        content: 'ПЕРЕЙТИ К КАРТОЧКЕ ТОВАРА';
     }
+
+    
 
     .description_div{
         display: flex;
